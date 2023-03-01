@@ -1,0 +1,9 @@
+VBGROUP 5.0
+Project=CommonControls\CommonControls.vbp
+Project=Themes\Win98\Win98.vbp
+Project=Themes\LunaBlue\LunaBlue.vbp
+Project=Themes\LunaGreen\LunaGreen.vbp
+Project=Themes\LunaSilver\LunaSilver.vbp
+Project=PopupMenu\PopupMenu.vbp
+Project=SSubTmr6\SSubTmr6.vbp
+StartupProject=Example\Windows GUI Toolkit Example.vbp

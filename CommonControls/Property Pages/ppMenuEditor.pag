@@ -1,0 +1,1221 @@
+VERSION 5.00
+Begin VB.PropertyPage ppMenuEditor 
+   Caption         =   "Menu Editor"
+   ClientHeight    =   6150
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   5625
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   6150
+   ScaleWidth      =   5625
+   Begin VB.CommandButton cmdInsert 
+      Caption         =   "Insert"
+      Height          =   345
+      Left            =   3195
+      TabIndex        =   31
+      ToolTipText     =   "Add a menu item"
+      Top             =   3540
+      Width           =   1020
+   End
+   Begin VB.PictureBox ImageList 
+      Height          =   480
+      Left            =   5925
+      ScaleHeight     =   420
+      ScaleWidth      =   1140
+      TabIndex        =   30
+      Top             =   2625
+      Width           =   1200
+   End
+   Begin VB.PictureBox imgProgressBar 
+      Height          =   240
+      Left            =   3930
+      ScaleHeight     =   180
+      ScaleMode       =   0  'User
+      ScaleWidth      =   100
+      TabIndex        =   27
+      Top             =   5775
+      Visible         =   0   'False
+      Width           =   1410
+      Begin VB.PictureBox imgProgress 
+         BackColor       =   &H00FF0000&
+         BorderStyle     =   0  'None
+         Height          =   285
+         Left            =   0
+         ScaleHeight     =   285
+         ScaleMode       =   0  'User
+         ScaleWidth      =   100
+         TabIndex        =   28
+         Top             =   0
+         Width           =   30
+      End
+   End
+   Begin VB.Timer tmrProgress 
+      Enabled         =   0   'False
+      Interval        =   1
+      Left            =   5850
+      Top             =   2055
+   End
+   Begin VB.PictureBox Picture1 
+      BorderStyle     =   0  'None
+      Height          =   810
+      Left            =   5820
+      Picture         =   "ppMenuEditor.pgx":0000
+      ScaleHeight     =   810
+      ScaleWidth      =   840
+      TabIndex        =   26
+      TabStop         =   0   'False
+      Top             =   900
+      Width           =   840
+   End
+   Begin VB.Frame Frame1 
+      Caption         =   "Current Item "
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1860
+      Left            =   135
+      TabIndex        =   21
+      Top             =   1365
+      Width           =   3930
+      Begin VB.ComboBox cmbEnabled 
+         Height          =   315
+         ItemData        =   "ppMenuEditor.pgx":06B9
+         Left            =   2385
+         List            =   "ppMenuEditor.pgx":06C3
+         Style           =   2  'Dropdown List
+         TabIndex        =   6
+         Top             =   675
+         Width           =   1350
+      End
+      Begin VB.TextBox txtImageNo 
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   2385
+         TabIndex        =   8
+         Text            =   "1"
+         Top             =   1410
+         Width           =   1335
+      End
+      Begin VB.ComboBox cmbValue 
+         Enabled         =   0   'False
+         Height          =   315
+         ItemData        =   "ppMenuEditor.pgx":06D4
+         Left            =   2400
+         List            =   "ppMenuEditor.pgx":06DE
+         Style           =   2  'Dropdown List
+         TabIndex        =   7
+         Top             =   1020
+         Width           =   1350
+      End
+      Begin VB.OptionButton optOption 
+         Caption         =   "Option"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   150
+         TabIndex        =   5
+         Top             =   1260
+         Width           =   1245
+      End
+      Begin VB.OptionButton optCheck 
+         Caption         =   "Check"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   150
+         TabIndex        =   4
+         Top             =   990
+         Width           =   1245
+      End
+      Begin VB.OptionButton optStandard 
+         Caption         =   "Standard"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   150
+         TabIndex        =   3
+         Top             =   720
+         Value           =   -1  'True
+         Width           =   1245
+      End
+      Begin VB.TextBox txtCaption 
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   915
+         TabIndex        =   2
+         Top             =   270
+         Width           =   2835
+      End
+      Begin VB.Label lblEnabled 
+         Caption         =   "Enabled"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   1470
+         TabIndex        =   25
+         Top             =   720
+         Width           =   720
+      End
+      Begin VB.Label lblImageNo 
+         Caption         =   "Image"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   1470
+         TabIndex        =   24
+         Top             =   1410
+         Width           =   915
+      End
+      Begin VB.Label lblValue 
+         Caption         =   "Value"
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   1470
+         TabIndex        =   23
+         Top             =   1065
+         Width           =   615
+      End
+      Begin VB.Label lblCaption 
+         Caption         =   "Caption :"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   270
+         Left            =   150
+         TabIndex        =   22
+         ToolTipText     =   "The caption for the current menu item"
+         Top             =   315
+         Width           =   840
+      End
+   End
+   Begin VB.CommandButton cmdDelete 
+      Caption         =   "Delete"
+      Height          =   345
+      Left            =   4275
+      TabIndex        =   14
+      ToolTipText     =   "Delete a menu item"
+      Top             =   3540
+      Width           =   1020
+   End
+   Begin VB.CommandButton cmdAdd 
+      Caption         =   "Add"
+      Height          =   345
+      Left            =   2130
+      TabIndex        =   13
+      ToolTipText     =   "Add a menu item"
+      Top             =   3540
+      Width           =   1020
+   End
+   Begin VB.CommandButton cmdDown 
+      Height          =   312
+      Left            =   1335
+      MaskColor       =   &H00FF00FF&
+      Picture         =   "ppMenuEditor.pgx":06EF
+      Style           =   1  'Graphical
+      TabIndex        =   12
+      Top             =   3555
+      UseMaskColor    =   -1  'True
+      Width           =   270
+   End
+   Begin VB.CommandButton cmdUp 
+      Height          =   312
+      Left            =   990
+      MaskColor       =   &H00FF00FF&
+      Picture         =   "ppMenuEditor.pgx":0905
+      Style           =   1  'Graphical
+      TabIndex        =   11
+      Top             =   3555
+      UseMaskColor    =   -1  'True
+      Width           =   270
+   End
+   Begin VB.CommandButton cmdForward 
+      Height          =   312
+      Left            =   660
+      MaskColor       =   &H00FF00FF&
+      Picture         =   "ppMenuEditor.pgx":0B1B
+      Style           =   1  'Graphical
+      TabIndex        =   10
+      ToolTipText     =   "Create a submenu"
+      Top             =   3555
+      UseMaskColor    =   -1  'True
+      Width           =   270
+   End
+   Begin VB.CommandButton cmdBack 
+      Height          =   312
+      Left            =   315
+      MaskColor       =   &H00FF00FF&
+      Picture         =   "ppMenuEditor.pgx":0D31
+      Style           =   1  'Graphical
+      TabIndex        =   9
+      ToolTipText     =   "Delete a submenu"
+      Top             =   3555
+      UseMaskColor    =   -1  'True
+      Width           =   270
+   End
+   Begin VB.ListBox lstMenuItems 
+      Height          =   1425
+      Left            =   240
+      TabIndex        =   15
+      Top             =   3930
+      Width           =   5130
+   End
+   Begin VB.ComboBox cmbMenuIndex 
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      ItemData        =   "ppMenuEditor.pgx":0F47
+      Left            =   1275
+      List            =   "ppMenuEditor.pgx":0F66
+      Style           =   2  'Dropdown List
+      TabIndex        =   0
+      TabStop         =   0   'False
+      Top             =   900
+      Width           =   780
+   End
+   Begin VB.TextBox txtMenuName 
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Left            =   2985
+      TabIndex        =   1
+      Top             =   885
+      Width           =   2400
+   End
+   Begin VB.PictureBox picTitleBack 
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H009C3000&
+      Height          =   675
+      Left            =   75
+      ScaleHeight     =   615
+      ScaleWidth      =   5235
+      TabIndex        =   16
+      TabStop         =   0   'False
+      Top             =   75
+      Width           =   5295
+      Begin VB.Label lblTitle 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Windows GUI Toolkit"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   9
+            Charset         =   0
+            Weight          =   700
+            Underline       =   -1  'True
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   195
+         Left            =   120
+         TabIndex        =   18
+         Top             =   60
+         Width           =   3255
+      End
+      Begin VB.Label lblInfo 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Menu Editor"
+         ForeColor       =   &H00C0C0C0&
+         Height          =   195
+         Left            =   120
+         TabIndex        =   17
+         Top             =   330
+         Width           =   3075
+      End
+   End
+   Begin VB.Label lblProgress 
+      Caption         =   "Creating Menu :"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Left            =   2670
+      TabIndex        =   29
+      ToolTipText     =   "The name that appears in the menu button"
+      Top             =   5790
+      Visible         =   0   'False
+      Width           =   1155
+   End
+   Begin VB.Line Line2 
+      BorderColor     =   &H00808080&
+      X1              =   210
+      X2              =   5400
+      Y1              =   3390
+      Y2              =   3390
+   End
+   Begin VB.Line Line1 
+      BorderColor     =   &H80000005&
+      X1              =   210
+      X2              =   5385
+      Y1              =   3405
+      Y2              =   3405
+   End
+   Begin VB.Label lblMenuIndex 
+      Caption         =   "Menu Item"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   270
+      Left            =   165
+      TabIndex        =   20
+      ToolTipText     =   "The menu button which is being edited"
+      Top             =   960
+      Width           =   975
+   End
+   Begin VB.Label lblMenuName 
+      Caption         =   "Name :"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Left            =   2280
+      TabIndex        =   19
+      ToolTipText     =   "The name that appears in the menu button"
+      Top             =   960
+      Width           =   720
+   End
+End
+Attribute VB_Name = "ppMenuEditor"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Citex Software                                                      '
+' Windows GUI Toolkit - ppMenuEditor.pag                              '
+' Copyright 1999-2001 Lawrence Schmid                                 '
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Option Explicit
+
+' Member variables
+Private WithEvents m_m_MenuObject As cPopupMenu
+Attribute m_m_MenuObject.VB_VarHelpID = -1
+Dim m_MenuEditor(9, 32) As tMenuEditor
+
+' Types
+Private Type tMenuEditor
+    sMenuName As String
+    sMenuItem As String
+    sMenuType As String
+    bMenuDefault As Boolean
+    bMenuEnabled As Boolean
+    iMenuImageNum As Integer
+    lMenuParentIndex As Long
+End Type
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Private functions
+
+' Creates the menu structure in memory using the data stored in the menu editor
+Private Sub pCreateMenu(iMenuIndex As Integer)
+    
+    ' Clear menu object if menu items exist
+    m_m_MenuObject.Clear
+    
+    If m_MenuEditor(iMenuIndex, 0).sMenuName = "" Then
+        Exit Sub
+    End If
+  
+    ' Loop through menu items
+    Dim iMenuItem As Integer
+    Dim iLastParentId As Long
+    For iMenuItem = 0 To 30
+        
+        ' With current menu item properies
+        With m_MenuEditor(iMenuIndex, iMenuItem)
+     
+            If .sMenuType <> "" Then
+             
+                ' Menu is marked with ! and is displayed in bold
+                If Left(.sMenuItem, 1) = "!" Then
+                    Call m_m_MenuObject.AddItem(Right(.sMenuItem, Len(.sMenuItem) - 1), , iMenuItem + 1, .lMenuParentIndex, .iMenuImageNum, False, .bMenuEnabled, .sMenuType)
+                    m_m_MenuObject.Default(iMenuItem + 1) = True
+                Else
+                    Call m_m_MenuObject.AddItem(.sMenuItem, , iMenuItem + 1, .lMenuParentIndex, .iMenuImageNum, False, .bMenuEnabled, .sMenuType)
+                End If
+                
+                Dim item As tMenuEditor
+                item = m_MenuEditor(iMenuIndex, iMenuItem)
+                
+                If item.sMenuType = "Check" And item.bMenuDefault = True Then
+                    m_m_MenuObject.Checked(iMenuItem + 1) = True
+                ElseIf item.sMenuType = "Option" And item.bMenuDefault = True Then
+                    m_m_MenuObject.RadioCheck(iMenuItem + 1) = True
+                End If
+                
+             End If
+            
+        End With
+        
+    Next iMenuItem
+
+    'Store menu to memory so it can be written to file
+    m_m_MenuObject.Store iMenuIndex & m_MenuEditor(iMenuIndex, 0).sMenuName
+
+End Sub
+
+' Deserializes menu object from file and stores in menu editor array
+Private Sub pReadFromFile(sMenuPath As String)
+
+    ' Initialize menu editor array
+    Dim iMenuIndex, iMenuItemIndex As Integer
+    For iMenuIndex = 1 To 9
+        m_MenuEditor(iMenuIndex, 0).sMenuType = "Standard"
+        For iMenuItemIndex = 0 To 30
+            m_MenuEditor(iMenuIndex, iMenuItemIndex).iMenuImageNum = -1
+            m_MenuEditor(iMenuIndex, iMenuItemIndex).bMenuEnabled = True
+        Next
+    Next
+    
+    ' Check if serialized menu object exists
+    If Dir(sMenuPath) <> "" Then
+        On Error Resume Next
+        m_m_MenuObject.RestoreFromFile , sMenuPath
+    Else
+        lstMenuItems.AddItem ""
+        Exit Sub
+    End If
+    
+    ' Retrieve array of stored menu structures
+    Dim oStoredMenu() As cStoreMenu
+    oStoredMenu = m_m_MenuObject.RetrieveStoredMenu
+    
+    Dim Menu As Integer
+    For Menu = 1 To UBound(oStoredMenu)
+    
+        ' Restore menu
+        m_m_MenuObject.Restore oStoredMenu(Menu).MenuName
+            
+        ' Retrieve menu items
+        Dim oStoredItem() As lMenuItem
+        oStoredItem = oStoredMenu(Menu).RetrieveMenuItems
+        
+        ' Restore tMenuItem structure to menu editor array
+        Dim iItem As Integer
+        For iItem = 1 To UBound(oStoredItem)
+        
+           m_MenuEditor(Menu, 0).sMenuName = Right(oStoredMenu(Menu).MenuName, Len(oStoredMenu(Menu).MenuName) - 1)
+           m_MenuEditor(Menu, iItem - 1).sMenuItem = oStoredItem(iItem).sCaption
+           m_MenuEditor(Menu, iItem - 1).bMenuDefault = oStoredItem(iItem).bDefault
+           m_MenuEditor(Menu, iItem - 1).sMenuType = oStoredItem(iItem).sKey
+           m_MenuEditor(Menu, iItem - 1).iMenuImageNum = oStoredItem(iItem).lIconIndex
+           m_MenuEditor(Menu, iItem - 1).lMenuParentIndex = oStoredItem(iItem).lParentIndex
+           m_MenuEditor(Menu, iItem - 1).bMenuEnabled = oStoredItem(iItem).bEnabled
+            
+        Next
+    
+    Next
+
+End Sub
+
+
+' Restores a list of menu items from the menu editor array
+Private Sub pRestoreMenuItems(iMenuIndex As Integer)
+    
+    lstMenuItems.Clear
+    txtMenuName.Text = m_MenuEditor(iMenuIndex, 0).sMenuName
+
+    ' Find the total number of menu items
+    Dim iMenuItem As Integer
+    Dim iTotalMenuItems As Integer
+    For iMenuItem = 0 To 30
+              
+        If m_MenuEditor(iMenuIndex, iMenuItem).sMenuItem <> "" Then
+            iTotalMenuItems = iTotalMenuItems + 1
+        End If
+    Next
+          
+    ' Loop through menu items
+    For iMenuItem = 0 To 30
+              
+        If m_MenuEditor(iMenuIndex, iMenuItem).sMenuItem <> "" Then
+ 
+            ' Root menu item
+            If m_MenuEditor(iMenuIndex, iMenuItem).lMenuParentIndex = 0 Then
+                lstMenuItems.AddItem m_MenuEditor(iMenuIndex, iMenuItem).sMenuItem
+            Else
+                
+                ' Nested sub menu
+                Dim iCount As Integer
+                Dim sIndentation As String
+                Dim lMenuParentIndex As Long
+                iCount = 0
+                sIndentation = ""
+                
+                Dim iLastSubmenu As Integer
+                iLastSubmenu = 0
+    
+                ' Find the last occurence of a submenu before the current item
+                Dim iItemCount As Integer
+                For iItemCount = 0 To iTotalMenuItems
+                    If m_MenuEditor(iMenuIndex, iItemCount).lMenuParentIndex = 0 And m_MenuEditor(iMenuIndex, iItemCount + 1).sMenuItem = "····" Then
+                        iLastSubmenu = iItemCount + 1
+                    End If
+                Next
+                
+                ' Create indentation for submenu items
+                Do
+                    
+                    ' Exit early if reached minimum index which can have a submenu
+                    If m_MenuEditor(iMenuIndex, iMenuItem).lMenuParentIndex - iCount <= 0 Then
+                        Exit Do
+                    End If
+                    
+                    ' Store the parent index of the previous menu item
+                    lMenuParentIndex = m_MenuEditor(iMenuIndex, m_MenuEditor(iMenuIndex, iMenuItem).lMenuParentIndex - iCount).lMenuParentIndex
+                    
+                    ' Add a level to the depth indentation
+                    If lMenuParentIndex <> iLastSubmenu Or iMenuItem = 1 Or lMenuParentIndex = 1 Then
+                        sIndentation = sIndentation + "····"
+                    Else
+                        Exit Do
+                    End If
+                    
+                    iCount = iCount + 1
+                
+                Loop
+            
+                lstMenuItems.AddItem sIndentation & m_MenuEditor(iMenuIndex, iMenuItem).sMenuItem
+               
+            End If
+        End If
+        
+    Next
+    
+End Sub
+
+' Retrieves the current menu item and updates the user interface
+Private Sub pRetrieveMenuItem()
+        
+    ' Set menu name and caption
+    txtMenuName.Text = m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuName
+    'txtCaption.Text = m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuItem
+
+    ' Set menu type
+    If m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Standard" Then
+        optStandard.Value = True
+    ElseIf m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Check" Then
+        optCheck.Value = True
+    ElseIf m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Option" Then
+        optOption.Value = True
+    End If
+        
+    ' Set default value
+    If m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).bMenuDefault = True Then
+        cmbValue.Text = "True"
+    Else
+        cmbValue.Text = "False"
+    End If
+    
+    ' Set enabled value
+    If m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).bMenuEnabled = False Then
+        cmbEnabled.Text = "False"
+    Else
+        cmbEnabled.Text = "True"
+    End If
+    
+    ' Sets image list index
+    txtImageNo.Text = m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).iMenuImageNum
+
+End Sub
+
+' Calculates the parent id of the submenu item based on the indentation
+Private Function pCalculateParentId()
+
+    ' Calculate the depth of the item
+    Dim iDepth As Integer
+    Dim iIndentRemoved As Integer
+    
+    ' Replace the indentation in the string
+    iIndentRemoved = Len(Replace(lstMenuItems.List(lstMenuItems.ListIndex), "····", ""))
+    
+    ' Calculate the length of the string with just the indentation and divide by 4
+    iDepth = ((Len(lstMenuItems.List(lstMenuItems.ListIndex)) - iIndentRemoved) / 4)
+    
+    ' Create the indentation string
+    Dim sIndentation As String
+    Dim iCount As Integer
+    For iCount = 1 To iDepth
+        sIndentation = sIndentation + "····"
+    Next
+    
+    ' Loop through items and find last entry at the specified depth
+    Dim iListItem As Integer
+    Dim iParentId As Integer
+    For iListItem = 0 To lstMenuItems.ListCount
+    
+        ' If the item is greater than the current list index exit early
+        If iListItem > lstMenuItems.ListIndex Then
+            Exit For
+        End If
+        
+        ' If this was the last occurence of at this indentation depth
+        If Left(lstMenuItems.List(iListItem), iDepth * 4) = sIndentation Then
+            
+            ' Check if previous item was at the same depth
+            If (Left(lstMenuItems.List(iListItem - 1), iDepth * 4) = sIndentation) Then
+                iParentId = iListItem - 1
+             Else
+                iParentId = iListItem
+            End If
+        
+        End If
+    
+    Next
+
+    pCalculateParentId = iParentId
+
+End Function
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Events
+
+' Menu index clicked
+Private Sub cmbMenuIndex_Click()
+
+    pRestoreMenuItems (cmbMenuIndex.Text)
+    
+     If lstMenuItems.ListCount > 0 Then
+        lstMenuItems.ListIndex = 0
+        txtCaption.Text = lstMenuItems.List(lstMenuItems.ListIndex)
+    End If
+    
+End Sub
+
+' Menu item clicked
+Private Sub lstMenuItems_Click()
+    
+    If lstMenuItems.ListCount > 0 Then
+        pRetrieveMenuItem
+        txtCaption.Text = lstMenuItems.List(lstMenuItems.ListIndex)
+    End If
+    
+End Sub
+
+' Menu item enabled
+Private Sub cmbEnabled_Click()
+
+    If lstMenuItems.ListCount > 0 Then
+        
+        If cmbEnabled.Text = "True" Then
+            m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).bMenuEnabled = True
+        Else
+            m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).bMenuEnabled = False
+        End If
+    
+    End If
+        
+    PropertyPage.Changed = True
+
+End Sub
+
+' Menu item default value selection (check / option) types
+Private Sub cmbValue_Click()
+
+    If lstMenuItems.ListCount > 0 Then
+
+        If cmbValue.Text = "True" Then
+            m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).bMenuDefault = True
+        Else
+            m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).bMenuDefault = False
+        End If
+    
+    End If
+
+    PropertyPage.Changed = True
+
+End Sub
+
+' Inserts a new menu item
+Private Sub cmdInsert_Click()
+
+    Dim s As String
+    s = Replace$(Trim$(txtCaption.Text), vbTab, "")
+    If Len(s) = 0 Then
+        MsgBox "Please enter a menu item caption.", , "Menu Editor"
+        Exit Sub
+    End If
+
+    If lstMenuItems.ListCount > 30 Then
+        MsgBox "Maximum 30 items in a menu.", , "Menu Editor"
+    End If
+
+    ' Insert a new item in the listbox
+    lstMenuItems.AddItem (txtCaption.Text), lstMenuItems.ListIndex
+    lstMenuItems.ListIndex = lstMenuItems.ListIndex - 1
+    txtCaption.SetFocus
+    
+    ' Shift variables down
+    Dim iCount As Integer
+    For iCount = lstMenuItems.ListIndex To lstMenuItems.ListCount
+        m_MenuEditor(cmbMenuIndex.Text, iCount + 1) = m_MenuEditor(cmbMenuIndex.Text, iCount)
+    Next
+    
+    ' Deletes existing item
+    m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuItem = ""
+    m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Standard"
+    m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).bMenuDefault = False
+    m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).bMenuEnabled = True
+    m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).iMenuImageNum = -1
+    m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).lMenuParentIndex = 0
+    
+    pRetrieveMenuItem
+        
+    PropertyPage.Changed = True
+
+End Sub
+
+
+
+' Deletes a menu item
+Private Sub cmdDelete_Click()
+     
+    If lstMenuItems.ListIndex = -1 Or lstMenuItems.ListCount < 1 Then
+        Exit Sub
+    End If
+              
+    ' Store the current list index
+    Dim iCurrentListIndex As Integer
+    iCurrentListIndex = lstMenuItems.ListIndex
+    
+    lstMenuItems.RemoveItem lstMenuItems.ListIndex
+    txtCaption.SetFocus
+    
+    ' Update menu editor array
+    Dim iCount As Integer
+    For iCount = iCurrentListIndex To 30
+        m_MenuEditor(cmbMenuIndex.Text, iCount) = m_MenuEditor(cmbMenuIndex.Text, iCount + 1)
+    Next
+        
+    ' Move list selection up
+     If iCurrentListIndex < lstMenuItems.ListCount Then
+        lstMenuItems.ListIndex = iCurrentListIndex
+    Else
+        lstMenuItems.ListIndex = iCurrentListIndex - 1
+        Exit Sub
+    End If
+    
+    PropertyPage.Changed = True
+
+End Sub
+
+' Moves listbox selection to previous menu item
+Private Sub cmdUp_Click()
+
+    If lstMenuItems.ListIndex > 0 Then
+        lstMenuItems.ListIndex = lstMenuItems.ListIndex - 1
+    End If
+
+End Sub
+
+' Moves listbox selection to the next menu item
+Private Sub cmdDown_Click()
+    
+    If lstMenuItems.ListIndex + 1 < lstMenuItems.ListCount Then
+        lstMenuItems.ListIndex = lstMenuItems.ListIndex + 1
+    End If
+
+End Sub
+
+' Removes a submenu item
+Private Sub cmdBack_Click()
+
+    ' If menu item is not a submenu
+    If Left(lstMenuItems.List(lstMenuItems.ListIndex), 4) <> "····" Then
+        Exit Sub
+    End If
+    
+    ' Remove a level of indentation
+    lstMenuItems.List(lstMenuItems.ListIndex) = Right(lstMenuItems.List(lstMenuItems.ListIndex), Len(lstMenuItems.List(lstMenuItems.ListIndex)) - 4)
+    
+    ' Set the parent menu item
+    If Left(lstMenuItems.List(lstMenuItems.ListIndex), 4) <> "····" Then
+        m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).lMenuParentIndex = 0
+    Else
+        m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).lMenuParentIndex = pCalculateParentId()
+    End If
+   
+    PropertyPage.Changed = True
+    
+End Sub
+
+' Adds a submenu item and sets the parent menu index
+Private Sub cmdForward_Click()
+
+    ' First item cannot be a sub menu
+    If lstMenuItems.ListIndex <= 0 Then
+        Exit Sub
+    End If
+    
+    ' Add the indentation characters to the list item
+    lstMenuItems.List(lstMenuItems.ListIndex) = "····" & lstMenuItems.List(lstMenuItems.ListIndex)
+         
+    ' Set the parent menu item
+    m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).lMenuParentIndex = pCalculateParentId()
+           
+    PropertyPage.Changed = True
+
+End Sub
+
+' Adds a new menu item
+Private Sub cmdAdd_Click()
+
+    Dim s As String
+    s = Replace$(Trim$(txtCaption.Text), vbTab, "")
+    If Len(s) = 0 Then
+        MsgBox "Please enter a menu item caption.", , "Menu Editor"
+        Exit Sub
+    End If
+
+    If lstMenuItems.ListCount > 30 Then
+        MsgBox "Maximum 30 items in a menu.", , "Menu Editor"
+        Exit Sub
+    End If
+
+    ' Add a new item to the listbox
+    lstMenuItems.AddItem (txtCaption.Text)
+    lstMenuItems.ListIndex = lstMenuItems.ListCount - 1
+    txtCaption.SetFocus
+    
+    ' Initialize menu item
+    m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuItem = txtCaption.Text
+    If optStandard.Value = True Then
+        m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Standard"
+    ElseIf optCheck.Value = True Then
+        m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Check"
+    ElseIf optOption.Value = True Then
+        m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Option"
+    End If
+
+    PropertyPage.Changed = True
+
+End Sub
+
+
+' Updates the menu name
+Private Sub txtMenuName_Change()
+             
+    Set m_m_MenuObject = New cPopupMenu
+    m_m_MenuObject.Clear
+             
+    ' Sets the menu name for each item
+    Dim iCount As Integer
+    For iCount = 0 To 31
+        m_MenuEditor(cmbMenuIndex.Text, iCount).sMenuName = txtMenuName.Text
+    Next
+    
+End Sub
+
+
+' Updates the menu item caption
+Private Sub txtCaption_Change()
+
+    If lstMenuItems.ListIndex < 0 Then
+        Exit Sub
+    End If
+
+    'Sets the caption variable for the current menu item
+    m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuItem = txtCaption.Text
+
+    If Left(lstMenuItems.List(lstMenuItems.ListIndex), 4) = "····" Then
+        
+        ' Calculate the depth of the item
+        Dim iDepth As Integer
+        Dim iIndentRemoved As Integer
+        
+        ' Replace the indentation in the string
+        iIndentRemoved = Len(Replace(lstMenuItems.List(lstMenuItems.ListIndex), "····", ""))
+        
+        ' Calculate the length of the string with just the indentation and divide by 4
+        iDepth = ((Len(lstMenuItems.List(lstMenuItems.ListIndex)) - iIndentRemoved) / 4)
+           
+        ' Create the indentation string
+        Dim sIndentation As String
+        Dim iCount As Integer
+        For iCount = 1 To iDepth
+            sIndentation = sIndentation + "····"
+        Next
+     
+        lstMenuItems.List(lstMenuItems.ListIndex) = sIndentation & m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuItem
+    Else
+        lstMenuItems.List(lstMenuItems.ListIndex) = m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuItem
+    End If
+    
+    PropertyPage.Changed = True
+
+End Sub
+
+' Sets menu item type to standard
+Private Sub optStandard_Click()
+    
+    ' Disable default value
+    lblValue.Enabled = False
+    cmbValue.Enabled = False
+    
+    ' Enable imagelist index
+    lblImageNo.Enabled = True
+    txtImageNo.Enabled = True
+    
+    ' Set the menu item type
+    If lstMenuItems.ListCount > 0 Then
+        m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Standard"
+    End If
+    
+    PropertyPage.Changed = True
+
+End Sub
+
+' Sets menu item type to check
+Private Sub optCheck_Click()
+
+    ' Enable default value
+    lblValue.Enabled = True
+    cmbValue.Enabled = True
+    
+    ' Disable imagelist index
+    lblImageNo.Enabled = False
+    txtImageNo.Enabled = False
+    txtImageNo.Text = -1
+    
+    ' Set the menu item type
+    If lstMenuItems.ListCount > 0 Then
+        m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Check"
+    End If
+    
+    PropertyPage.Changed = True
+    
+End Sub
+
+' Sets menu item type to option
+Private Sub optOption_Click()
+
+    ' Enable default value
+    lblValue.Enabled = True
+    cmbValue.Enabled = True
+    
+    ' Disable imagelist index
+    lblImageNo.Enabled = False
+    txtImageNo.Enabled = False
+    txtImageNo.Text = -1
+        
+    ' Set the menu item type
+    If lstMenuItems.ListCount > 0 Then
+        m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).sMenuType = "Option"
+    End If
+
+    PropertyPage.Changed = True
+
+End Sub
+
+' View the image list being used for the menu
+Private Sub cmdImageList_Click()
+
+    If Right(Dir(SelectedControls(0).MenuImageStrip), 4) <> ".bmp" And _
+       Right(Dir(SelectedControls(0).MenuImageStrip), 4) <> ".gif" Then
+        Call MsgBox("Please enter a valid image list path", vbOKOnly, "File path error")
+    End If
+
+End Sub
+
+' Updates the menu item image list index
+Private Sub txtImageNo_Change()
+
+    ' If a numeric character has been entered
+    If IsNumeric(txtImageNo.Text) = True Then
+        m_MenuEditor(cmbMenuIndex.Text, lstMenuItems.ListIndex).iMenuImageNum = Val(txtImageNo.Text)
+    Else
+        txtImageNo.Text = "0"
+    End If
+    
+    PropertyPage.Changed = True
+
+End Sub
+
+' Occurs when an application creates an instance of a property page
+Private Sub PropertyPage_Initialize()
+
+    ' Setup the Menu Object
+    Set m_m_MenuObject = New cPopupMenu
+    m_m_MenuObject.Clear
+    m_m_MenuObject.hWndOwner = PropertyPage.hwnd
+    m_m_MenuObject.ImageList = ImageList
+    
+    cmbMenuIndex.Text = "1"
+    
+    cmbEnabled.Text = "True"
+    cmbValue.Text = "False"
+
+End Sub
+
+
+' Occurs when the selection of controls on the property page has changed
+Private Sub PropertyPage_SelectionChanged()
+    
+    ' Try to load menu editor temp files
+    pReadFromFile SelectedControls(0).MenuPath
+    
+    ' Load list box info
+    Call cmbMenuIndex_Click
+
+End Sub
+
+' Occurs when the user presses the OK button or the Apply button on the property page
+Private Sub PropertyPage_ApplyChanges()
+
+    ' Display progress bar
+    tmrProgress.Enabled = True
+    imgProgressBar.Visible = True
+    lblProgress.Visible = True
+    
+    ' Loop through menus
+    Dim intcount As Integer
+    For intcount = 1 To 9
+        DoEvents
+        pCreateMenu intcount
+    Next
+    
+    ' Delete existing file
+    Dim TestStr As String
+    TestStr = ""
+    TestStr = Dir(SelectedControls(0).MenuPath)
+    If TestStr <> "" Then
+        Kill (SelectedControls(0).MenuPath)
+    End If
+    
+    ' Create menu folder if doesn't exist
+    Dim strFullFilePath As String
+    strFullFilePath = SelectedControls(0).MenuPath
+    Dim fso
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    Dim folderExists As Boolean
+    folderExists = fso.folderExists(fso.GetParentFolderName(strFullFilePath))
+    
+    If folderExists = False Then
+        MkDir (fso.GetParentFolderName(strFullFilePath))
+    End If
+
+    ' Serialize menu strucuture to file
+    m_m_MenuObject.StoreToFile , SelectedControls(0).MenuPath
+
+    ' Hide progress bar
+    tmrProgress.Enabled = False
+    imgProgressBar.Visible = False
+    lblProgress.Visible = False
+
+End Sub
+
+' Update the progress bar
+Private Sub tmrProgress_Timer()
+
+    If imgProgress.Width < 100 Then
+        imgProgress.Width = imgProgress.Width + 5
+    Else
+        imgProgress.Width = 1
+    End If
+
+End Sub
