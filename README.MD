@@ -115,7 +115,7 @@ To create a new menu:
 
 # Note
 
-Unfortunately modern browsers and Windows Defender flag some Visual Basic 6 executables as potential threats so to download the release you will need to use the command line:
+Unfortunately modern browsers flag some Visual Basic 6 executables as potential threats so you may need to use the the command line to download the release.
 
 ```
 gh release download -R https://github.com/lschmid83/Windows-GUI-Toolkit -A zip -O "c:\release\Windows GUI Toolkit.zip"
