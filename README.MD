@@ -115,7 +115,11 @@ To create a new menu:
 
 # Note
 
-Unfortunaltely modern browsers and Windows Defender flag some Visual Basic 6 executables as potential threats. Therefore I have been unable to provide a release distribution for this program. You will have to compile the source code yourself to run it.
+Unfortunately modern browsers and Windows Defender flag some Visual Basic 6 executables as potential threats so to download the release you will need to use the command line:
+
+```
+gh release download -R https://github.com/lschmid83/Windows-GUI-Toolkit -A zip -O "c:\release\Windows GUI Toolkit.zip"
+```
 
 # Acknowledgements
 
