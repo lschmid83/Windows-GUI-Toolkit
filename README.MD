@@ -26,6 +26,12 @@ The project includes common control replacements for the following:
 * ToolBarButton
 * MenuBar
 
+Here are some screenshots of the toolkit running under Windows 10:
+
+<img align='left' src='https://drive.google.com/uc?id=15Xn2d4biUj8zKssmvmOA38fjuIIpKGBd' width='240'>
+<img align='left' src='https://drive.google.com/uc?id=1KppjbIiYRS187LWsdV7WcO7Re-0kOFMr' width='240'>
+<img src='https://drive.google.com/uc?id=1oXZUQhNNIdvPobjbh4WU_I9N0pTNcTEZ' width='240'>
+
 # Install Visual Studio 6.0
 
 Unfortunately modern versions of Visual Studio no longer support ActiveX UserControl technology so it necessary to install Visual Basic 6 if you want to use these components in your own projects.
