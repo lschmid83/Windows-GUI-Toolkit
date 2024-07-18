@@ -28,9 +28,9 @@ The project includes common control replacements for the following:
 
 Here are some screenshots of the toolkit running under Windows 10:
 
-<img align='left' src='https://drive.google.com/uc?id=15Xn2d4biUj8zKssmvmOA38fjuIIpKGBd' width='240'>
-<img align='left' src='https://drive.google.com/uc?id=1KppjbIiYRS187LWsdV7WcO7Re-0kOFMr' width='240'>
-<img src='https://drive.google.com/uc?id=1oXZUQhNNIdvPobjbh4WU_I9N0pTNcTEZ' width='240'>
+<img align='left' src='https://drive.google.com/uc?id=1RW8gQs0Bozjd1vIV1Ouk5B2GwZBL9gOq' width='240'>
+<img align='left' src='https://drive.google.com/uc?id=1R6vzJurZ8gj3mcON-odnmug9n4IvS4Gi' width='240'>
+<img src='https://drive.google.com/uc?id=1emvNJ06k2vjeN1xVsRvtLEhyXLUkqQ40' width='240'>
 
 # Install Visual Studio 6.0
 
